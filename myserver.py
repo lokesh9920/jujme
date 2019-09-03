@@ -4,7 +4,8 @@ app = Flask(__name__)
 data_dict = {}
 scribble_dict = {}
 opins = {}
-temp_mail = "hi@gmail.com"
+temp_mail="dummy@gmail.com"
+
 @app.route("/")
 def initpage():
 	return redirect("/home")
@@ -53,7 +54,7 @@ def loggedinsucc():
 			if email not in list(opins.keys()):
 				 return "Uh Oh ! No one Judged you yet, Feel lucky The world didn't judge you !!"
 			personal_list = opins[email]
-			return render_template("private.html", lst = personal_list)
+			return render_template("private.html", opines = personal_list,name = email)
 		else:
 			return "you entered wrong password"
 	else:	
@@ -70,6 +71,7 @@ def scribbling():
 	#return render_template("private_page",key = s_key, dic =  scribble_dict)
 	if s_key  not in  list(data_dict.keys()):
 		return "Invalid URL...key doesnt exist"
+	global temp_mail
 	temp_mail = data_dict[s_key][0]
 	name  = data_dict[s_key][2]
 	return render_template("scribbling_page.html", name = name)
@@ -77,9 +79,9 @@ def scribbling():
 @app.route("/scribbled", methods = ["POST"])
 def donescribbling():
 	opinion = request.form.get("opinion")
-	if temp_mail not in list(opins.keys()):
+	if temp_mail  not in list(opins.keys()):
 			opins[temp_mail] = []
 	opins[temp_mail].append(opinion)
-	return "You have successfully scribbled about your friend"
+	return "You have scribbled successfully!"
 #if(__name__ == "__main__"):
 #	app.run()

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+
+
+<html lang = 'en'>
+
+	<head>  <title>{{name}}|JUJME </title>
+	</head>
+
+	<body>
+		These are what people Opined about you : 
+
+	<ol>
+		{% for message in opines %}
+			<li> {{message}} </li>
+		{% endfor %}
+
+
+	</ol>
+	</body>
+</html>
